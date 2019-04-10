@@ -119,7 +119,7 @@
         <span id="channel-name">#SevenContinents</span>
         <small id="channel-location">by <strong>cheeses.yard.applies</strong></small>
         <!-- #7 star is now font-awesome -->
-        <i class="fas fa-star" onclick="star()"></i>
+        <i class="fas fa-star primary" onclick="star()"></i>
     </h1>
 
     <div id="messages">
@@ -128,21 +128,21 @@
             <h3><a href="http://w3w.co/cheeses.yard.applies" target="_blank"><strong>cheeses.yard.applies</strong></a>
                 Wed, June 20th, 13:37 <em>15 min. left</em></h3>
             <p>What's the place you folks call home?</p>
-            <button>+5 min.</button>
+            <button class="accent materialButton">+5 min.</button>
         </div>
 
         <div class="message">
             <h3><a href="http://w3w.co/truck.cotton.zone" target="_blank"><strong>truck.cotton.zone</strong></a>
                 Wed, June 20th, 13:39 <em>4 min. left</em></h3>
             <p>BRISBANE! Hang loose!</p>
-            <button>+5 min.</button>
+            <button class="accent materialButton">+5 min.</button>
         </div>
 
         <div class="message">
             <h3><a href="http://w3w.co/thus.best.dishes" target="_blank"><strong>thus.best.dishes</strong></a>
                 Wed, June 20th, 14:02 <em>12 min. left</em></h3>
             <p>The big apple.</p>
-            <button>+5 min.</button>
+            <button class="accent materialButton">+5 min.</button>
         </div>
 
         <div class="message">
@@ -150,7 +150,7 @@
                    target="_blank"><strong>driveway.helper.magazine</strong></a>
                 Wed, June 20th, 14:02 <em>7 min. left</em></h3>
             <p>Eu sou um Cariocas.</p>
-            <button>+5 min.</button>
+            <button class="accent materialButton">+5 min.</button>
         </div>
 
         <div class="message">
@@ -158,7 +158,7 @@
                    target="_blank"><strong>escapes.pitch.saucepan</strong></a>
                 Wed, June 20th, 14:07 <em>14 min. left</em></h3>
             <p>Greetings from the western cape!</p>
-            <button>+5 min.</button>
+            <button class="accent materialButton">+5 min.</button>
         </div>
 
         <div class="message">
@@ -166,14 +166,14 @@
                    target="_blank"><strong>meanings.identity.pays</strong></a>
                 Wed, June 20th, 04:08 <em>15 min. left</em></h3>
             <p>北京</p>
-            <button>+5 min.</button>
+            <button class="accent materialButton">+5 min.</button>
         </div>
 
     </div>
 
     <!-- ChAT BAR -->
     <div id="chat-bar">
-        <button id="emojis-button" onclick="toggleEmojis()">
+        <button id="emojis-button" class="primary materialButton" onclick="toggleEmojis()">
             <!-- #7 replacing icons -->
             <i class="far fa-smile"></i>
         </button>
@@ -182,7 +182,7 @@
                It also gets an id -->
         <input type="text" placeholder="Message..." maxlength="140" id="message">
         <!-- #8 send message requires a button -->
-        <button onclick="sendMessage()"><i class="fas fa-arrow-right"></i></button>
+        <button id="sendButton" class="accent materialButton" onclick="sendMessage()"><i class="fas fa-arrow-right"></i></button>
     </div>
 </div>
 
