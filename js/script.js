@@ -16,6 +16,8 @@ var currentLocation = {
     what3words: "shelf.jetted.purple"
 };
 
+var channels = [yummy, sevencontinents, killerapp, firstpersononmars, octoberfest];
+
 /**
  * Switch channels name in the right app bar
  * @param channelObject
@@ -82,6 +84,15 @@ function toggleEmojis() {
     $('#emojis').toggle(); // #toggle
 }
 
+/* #10 adding emojis with this function and calling function in the body onload event */
+function loadEmojis() {
+    var emojis = require('emojis-list');
+    $('#emojis').empty();
+    for (emoji in emojis) {
+        $('#emojis').append(emojis[emoji] + " ");
+    }
+}
+
 /**
  * #8 This #constructor function creates a new chat #message.
  * @param text `String` a message text
@@ -146,15 +157,25 @@ function createMessageElement(messageObject) {
 
 
 function listChannels() {
-    // #8 channel onload
-    //$('#channels ul').append("<li>New Channel</li>")
+    //  #8 channel onload
+    // $('#channels ul').append("<li>New Channel</li>")
 
-    // #8 five new channels
-    $('#channels ul').append(createChannelElement(yummy));
-    $('#channels ul').append(createChannelElement(sevencontinents));
-    $('#channels ul').append(createChannelElement(killerapp));
-    $('#channels ul').append(createChannelElement(firstpersononmars));
-    $('#channels ul').append(createChannelElement(octoberfest));
+    //  #8 five new channels
+    //  $('#channels ul').append(createChannelElement(yummy));
+    //  $('#channels ul').append(createChannelElement(sevencontinents));
+    //  $('#channels ul').append(createChannelElement(killerapp));
+    //  $('#channels ul').append(createChannelElement(firstpersononmars));
+    //  $('#channels ul').append(createChannelElement(octoberfest));
+     console.log("listChannels wurde aufgerufen");
+     console.log("Channels array"+ channels[0])
+
+
+     var i;
+     for (i = 0; i < channels.length; i++) { 
+         $('#channels ul').append(createChannelElement(channels[i]));
+         console.log("i is"+ channels[i].name);
+     }
+
 }
 
 /**
@@ -178,7 +199,7 @@ function createChannelElement(channelObject) {
 
     // create and append channel meta
     var meta = $('<span>').addClass('channel-meta').appendTo(channel);
-
+        
     // The star including star functionality.
     // Since we don't want to append child elements to this element, we don't need to 'wrap' it into a variable as the elements above.
     $('<i>').addClass('fa-star').addClass(channelObject.starred ? 'fas' : 'far').appendTo(meta);
@@ -193,3 +214,44 @@ function createChannelElement(channelObject) {
     // return the complete channel
     return channel;
 }
+
+// Compare Functions
+function compareNew(channel1, channel2){
+    if (channel1.createdOn > channel2.createdOn) {
+        return -1; //Channel 1 is newer
+    } else {
+        return 1; //Channel 2 is newer
+}
+}
+
+function compareTrending(channel1, channel2){
+    if (channel1.messageCount > channel2.messageCount) {
+        return -1; //Channel 1 has more Messages
+    } else {
+        return 1; //Channel 2 has less messages
+}
+}
+
+function compareFav(){
+    
+}
+  
+
+// Create three #compare functions for sorting the channels by new, trending, or favorites in a descending order: 
+// New above old, more above less, and starred above unstarred. 
+// The function should only compare and not yet sort.
+
+// var ponyOne = {name: 'Lilla Gubben', size: 1.49};
+// var ponyTwo = {name: 'Jolly Jumper', size: 1.86};
+// function compareSize(ponyOne, ponyTwo) {
+//    if (ponyOne.size < ponyTwo.size) {
+//        return -1; //Pony one is smaller and should be sorted first
+//    } else {
+//        return 1; //Pony two is smaller (or equal) and should be sorted firs
+// } }
+// array.sort()
+
+// t
+// function compareSize(ponyOne, ponyTwo) {
+//    return (ponyOne.size - ponyTwo.size);
+//  }

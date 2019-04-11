@@ -22,13 +22,16 @@
     <!-- #7 embed external JavaScript file for channel objects -->
     <script src="js/channels.js"></script>
 
+    <!-- #10 embed emoji list -->
+    <script src="js/emojis-list.js" type="text/javascript" charset="utf-8"></script>
+
     <!-- embed external JavaScript file for app interaction -->
     <script src="js/script.js"></script>
 
 </head>
 
 <!-- #8 #channel #onload all channels when the body has loaded -->
-<body onload="listChannels()">
+<body onload="listChannels(); loadEmojis()">
 
 <!-- channel area -->
 <div id="channels" class="md-whiteframe-8dp">
@@ -93,9 +96,7 @@
     </ul>
 
     <!-- Floating Action Button -->
-    <div class="fab md-whiteframe-6dp">
-        +
-    </div>
+    <button id="fab" class="accent shadow--6dp"><i class="fas fa-plus"></i></button>
 
     <!-- TAB BAR -->
     <div id="tab-bar" class="md-whiteframe-8dp">
@@ -182,14 +183,22 @@
             <!-- #7 replacing icons -->
             <i class="far fa-smile"></i>
         </button>
-        <div id="emojis">&#x1F601; &#x1F602; &#x1F603; &#x1F604; &#x1F605; &#x1F606; &#x1F607;</div>
+        
+        <!-- #9 shadow: menu goes 8dp high -->
+        <div id="emojis" class="shadow--8dp">&#x1F601; &#x1F602; &#x1F603; &#x1F604; &#x1F605; &#x1F606; &#x1F607;</div>
+        
         <!-- #8 create a new input element which accepts text and has a prefill as well as a character limit.
                It also gets an id -->
         <input type="text" placeholder="Message..." maxlength="140" id="message">
         <!-- #8 send message requires a button -->
         <button id="sendButton" class="accent materialButton" onclick="sendMessage()"><i class="fas fa-arrow-right"></i></button>
+        <!-- #10: #new #styled button for creating a channel -->
+        <button id="button-create" class="accent materialButton" onclick="createChannel();">CREATE</button>
+    
     </div>
 </div>
+
+
 
 </body>
 </html>
