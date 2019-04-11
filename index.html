@@ -31,7 +31,7 @@
 </head>
 
 <!-- #8 #channel #onload all channels when the body has loaded -->
-<body onload="listChannels(); loadEmojis()">
+<body onload="listChannels(compareNew); loadEmojis()">
 
 <!-- channel area -->
 <div id="channels" class="md-whiteframe-8dp">
@@ -44,73 +44,25 @@
 
     <!-- CHANNELS -->
     <ul>
-        <!-- #8 #remove all #channels -->
-        <!-- This document will trigger many warning and errors when using the W3C Validator due to comments in comments, which is not allowed. We let them in here so you can check out the solution for Challenge 7. -->
-        <!-- #7  calls our switchChannel with the corresponding OBJECT as an argument -->
-        
-            <!-- <li onclick="switchChannel(yummy)">
-            #Yummy
-            <span class="channel-meta"> -->
-                <!-- #7  replace images with icons-->
-                <!-- <i class="far fa-star"></i>
-                <i class="fas fa-chevron-right"></i>
-            </span>
-        </li> -->
-        <!-- #7  calls our switchChannel with the corresponding OBJECT as an argument -->
-        <!-- <li class="selected" onclick="switchChannel(sevencontinents)">
-            #SevenContinents
-            <span class="channel-meta"> -->
-                <!-- #7  replace images with icons-->
-                <!-- <i class="far fa-star"></i>
-                <i class="fas fa-chevron-right"></i>
-            </span>
-        </li> -->
-        <!-- #7  calls our switchChannel with the corresponding OBJECT as an argument -->
-        <!-- <li onclick="switchChannel(killerapp)">
-            #KillerApp
-            <span class="channel-meta"> -->
-                <!-- #7  replace images with icons-->
-                <!-- <i class="far fa-star"></i>
-                <i class="fas fa-chevron-right"></i>
-            </span>
-        </li> -->
-        <!-- #7  calls our switchChannel with the corresponding OBJECT as an argument -->
-        <!-- <li onclick="switchChannel(firstpersononmars)">
-            #FirstPersonOnMars
-            <span class="channel-meta"> -->
-                <!-- #7  replace images with icons-->
-                <!-- <i class="far fa-star"></i>
-                <i class="fas fa-chevron-right"></i>
-            </span>
-        </li> -->
-        <!-- #7  calls our switchChannel with the corresponding OBJECT as an argument -->
-        <!-- <li onclick="switchChannel(octoberfest)">
-            #Octoberfest
-            <span class="channel-meta"> -->
-                <!-- #7  replace images with icons-->
-                <!-- <i class="far fa-star"></i>
-                <i class="fas fa-chevron-right"></i>
-            </span>
-        </li> -->
        
     </ul>
 
     <!-- Floating Action Button -->
-    <button id="fab" class="accent shadow--6dp"><i class="fas fa-plus"></i></button>
+    <button id="fab" class="accent shadow--6dp" onclick="initCreationMode()"><i class="fas fa-plus"></i></button>
 
     <!-- TAB BAR -->
     <div id="tab-bar" class="md-whiteframe-8dp">
-        <button class="selected" id="tab-new" onclick="selectTab('#tab-new')">
+        <button class="selected" id="tab-new" onclick="selectTab('#tab-new'); listChannels(compareNew)">
             <!-- #7  replacing icons -->
             <i class="far fa-lightbulb"></i>
             New
         </button>
-        <button id="tab-trending" onclick="selectTab('#tab-trending')">
+        <button id="tab-trending" onclick="selectTab('#tab-trending'); listChannels(compareTrending)">
             <!-- #7  replacing icons -->
             <i class="fas fa-fire"></i>
             Trending
         </button>
-        <button id="tab-favorites" onclick="selectTab('#tab-favorites')">
+        <button id="tab-favorites" onclick="selectTab('#tab-favorites'); listChannels(compareFavorites)">
             <!-- #7  replacing icons -->
             <i class="fas fa-star"></i>
             Favorites
@@ -121,16 +73,23 @@
 <div id="chat">
 
     <!-- APP BAR for CHANNEL TITLE -->
-    <h1 class="md-whiteframe-8dp">
+    <h1 id="app-bar-messages" class="md-whiteframe-8dp">
         <span id="channel-name">#SevenContinents</span>
         <small id="channel-location">by <strong>cheeses.yard.applies</strong></small>
         <!-- #7 star is now font-awesome -->
         <i class="fas fa-star primary" onclick="star()"></i>
     </h1>
 
+    <!-- #10 APP BAR for NEW CHANNEL -->
+    <h1 id="app-bar-create" class="shadow--4dp">
+            <!-- #10 input field for channel name -->
+            <input type="text" id="new-channel" placeholder="Enter a #ChannelName"/>
+            <button class="primary materialButton" onclick="abortCreationMode()"><i></i>X Abort</button>
+        </h1>
+
     <div id="messages">
 
-        <div class="message own md-whiteframe-2dp">
+        <!-- <div class="message own md-whiteframe-2dp">
             <h3><a href="http://w3w.co/cheeses.yard.applies" target="_blank"><strong>cheeses.yard.applies</strong></a>
                 Wed, June 20th, 13:37 <em>15 min. left</em></h3>
             <p>What's the place you folks call home?</p>
@@ -173,11 +132,11 @@
                 Wed, June 20th, 04:08 <em>15 min. left</em></h3>
             <p>北京</p>
             <button class="accent materialButton">+5 min.</button>
-        </div>
+        </div> -->
 
     </div>
 
-    <!-- ChAT BAR -->
+    <!-- CHAT BAR -->
     <div id="chat-bar" class="md-whiteframe-8dp">
         <button id="emojis-button" class="primary materialButton" onclick="toggleEmojis()">
             <!-- #7 replacing icons -->
@@ -192,7 +151,7 @@
         <input type="text" placeholder="Message..." maxlength="140" id="message">
         <!-- #8 send message requires a button -->
         <button id="sendButton" class="accent materialButton" onclick="sendMessage()"><i class="fas fa-arrow-right"></i></button>
-        <!-- #10: #new #styled button for creating a channel -->
+        <!-- #10: new button for creating a channel -->
         <button id="button-create" class="accent materialButton" onclick="createChannel();">CREATE</button>
     
     </div>

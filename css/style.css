@@ -93,6 +93,32 @@ h1 i {
     font-size:24px;
 }
 
+/* #10 new Channel App Bar Styling */
+#app-bar-create {
+    /* #10 styled and placed */
+    align-items: center;
+    padding-right: 0;
+    /* by default hidden*/
+    display: none;
+}
+
+#app-bar-create.show {
+    /* to show the "new-channel"-app-bar, we need display:flex */
+    display: flex;
+}
+
+/* styling input field */
+#app-bar-create input {
+    font-size: 20px;
+    border: none;
+    border-radius: 2px;
+    margin-top: 3px;
+    padding: 4px;
+
+    display: block;
+    flex-grow: 1;
+}
+
 /* CHANNELS LIST */
 
 ul {
@@ -179,7 +205,6 @@ li.selected {
     border-color: red; */
 }
 
-
 #tab-bar button.selected {
     color: #3F51B5;
     border-bottom: 4px solid #3F51B5;
@@ -196,6 +221,11 @@ li.selected {
 
 #chat-bar {
     z-index: 0;
+}
+
+#button-create {
+    /* #10 new channel input field with button; initially invisible */
+    display: none;
 }
 
 #chat-bar button {
@@ -293,14 +323,14 @@ li.selected {
     position: relative;
 }
 
+/* +5 min. button*/
 .message button  {
-    /* +5 min. button*/
     /* #9 Styling of +5Min buttons */
     /* background-color: #CDDC39;
     color: black; */
     text-transform: uppercase;
 
-/* Now solved with class .materialButton */
+/* #10 Now solved with class .materialButton */
 /* Material Design properties */
     /* font-size: 14px;
     height: 36px;
@@ -319,7 +349,7 @@ li.selected {
     margin-left: 17.5%;
 }
 
-/* #9 Button Styling CSS Rules */
+/* #9 Button Styling CSS Rules with color palette */
 
 .primary{
     background-color: #3F51B5;
@@ -339,9 +369,13 @@ li.selected {
 .accent:hover{
     background-color: #A7B613;
 }
+.accent:active{
+    background-color: #A7B613;
+}
 
+/* Material Design properties */
+/* extra class to apply it individually to new buttons */
 .materialButton{
-    /* Material Design properties */
     font-size: 14px;
     height: 36px;
     min-width: 54px;
@@ -350,6 +384,7 @@ li.selected {
     margin: 8px;
 }
 
+/* #9 Triangle left on message */
 .message p:before {
     content: '';
 
@@ -365,8 +400,9 @@ li.selected {
     filter: drop-shadow(-2px 1px 1px rgba(0, 0, 0, 0.14));
 }
 
+/* #9 Triangle right on own message */
 .message.own p:before {
-    /* #9 same as for the right; overriding some styles */
+    /* #9 same for the right; overriding some styles */
     left: 100%;
     /* #9 triangle right */
     border-bottom: 20px solid transparent;
@@ -377,7 +413,8 @@ li.selected {
     filter: drop-shadow(2px 0px 1px rgba(0, 0, 0, 0.14));
 }
 
-/* Styling of Floating Action Button */
+/* #9 Styling of Floating Action Button */
+/* fab = Floating Action Button */
 #fab {
     height: 56px;
     width: 56px;
@@ -397,9 +434,9 @@ li.selected {
   }
 
 
-/* EXTERNAL RESSOURCES */
+/* ------- EXTERNAL RESSOURCES ------- */
 
-/* Arrows */
+/* ARROWS */
 /* Shoutout to Chris Coyier from css-tricks.com */
 
 .arrow-up {
@@ -438,9 +475,7 @@ li.selected {
     border-right:10px solid blue; 
   }
 
-
-/* Shadows */
-
+/* SHADOWS */
 
 /* Shoutout to Scott Roa for reverse-erngineering Material Design Shadows! */
 .md-whiteframe-1dp {

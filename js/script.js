@@ -77,9 +77,9 @@ function selectTab(tabId) {
     $(tabId).addClass('selected');
 }
 
-/**
- * toggle (show/hide) the emojis menu
- */
+
+// toggle (show/hide) the emojis menu
+
 function toggleEmojis() {
     $('#emojis').toggle(); // #toggle
 }
@@ -117,8 +117,23 @@ function sendMessage() {
     //var message = new Message("Hello chatter");
 
     // #8 let's now use the real message #input
-    var message = new Message($('#message').val());
-    console.log("New message:", message);
+    var text = ($('#message').val());
+
+    // #10 Checking if message is empty
+    if (text.length == 0) {
+        //exit if no text
+        alert("Please enter some text");
+        return;
+    }
+
+    // #10 New Variable message, when text is not empty
+    var message = new Message(text);
+
+    // #10 pushing new message to current channel array
+    currentChannel.messages.push(message);
+
+    // #10 increasing message count +1 
+    currentChannel.messageCount+=1;
 
     // #8 convenient message append with jQuery:
     $('#messages').append(createMessageElement(message));
@@ -156,20 +171,19 @@ function createMessageElement(messageObject) {
 }
 
 
-function listChannels() {
+function listChannels(criterion) {
     //  #8 channel onload
-    // $('#channels ul').append("<li>New Channel</li>")
 
-    //  #8 five new channels
-    //  $('#channels ul').append(createChannelElement(yummy));
-    //  $('#channels ul').append(createChannelElement(sevencontinents));
-    //  $('#channels ul').append(createChannelElement(killerapp));
-    //  $('#channels ul').append(createChannelElement(firstpersononmars));
-    //  $('#channels ul').append(createChannelElement(octoberfest));
      console.log("listChannels wurde aufgerufen");
      console.log("Channels array"+ channels[0])
 
+    // #10 sorting channels by criterion
+     channels.sort(criterion);
 
+    // #10 avoids duplicating list when clicking tab bar buttons
+    $('#channels ul').empty();
+
+    // #10 appends channels from array
      var i;
      for (i = 0; i < channels.length; i++) { 
          $('#channels ul').append(createChannelElement(channels[i]));
@@ -184,15 +198,6 @@ function listChannels() {
  * @returns {HTMLElement}
  */
 function createChannelElement(channelObject) {
-    /* this HTML is build in jQuery below:
-     <li>
-     {{ name }}
-        <span class="channel-meta">
-            <i class="far fa-star"></i>
-            <i class="fas fa-chevron-right"></i>
-        </span>
-     </li>
-     */
 
     // create a channel
     var channel = $('<li>').text(channelObject.name);
@@ -215,43 +220,42 @@ function createChannelElement(channelObject) {
     return channel;
 }
 
-// Compare Functions
-function compareNew(channel1, channel2){
-    if (channel1.createdOn > channel2.createdOn) {
-        return -1; //Channel 1 is newer
-    } else {
-        return 1; //Channel 2 is newer
-}
+// #10 Compare Functions
+
+function compareTrending(channelA, channelB) {
+    return channelB.messageCount - channelA.messageCount;
 }
 
-function compareTrending(channel1, channel2){
-    if (channel1.messageCount > channel2.messageCount) {
-        return -1; //Channel 1 has more Messages
-    } else {
-        return 1; //Channel 2 has less messages
-}
+function compareNew(channelA, channelB) {
+    return channelB.createdOn - channelA.createdOn;
 }
 
-function compareFav(){
-    
+function compareFavorites(channelA, channelB) {
+    return channelA.starred ? -1 : 1;
 }
-  
 
-// Create three #compare functions for sorting the channels by new, trending, or favorites in a descending order: 
-// New above old, more above less, and starred above unstarred. 
-// The function should only compare and not yet sort.
+// #10 new function for "create new channel"-Mode
 
-// var ponyOne = {name: 'Lilla Gubben', size: 1.49};
-// var ponyTwo = {name: 'Jolly Jumper', size: 1.86};
-// function compareSize(ponyOne, ponyTwo) {
-//    if (ponyOne.size < ponyTwo.size) {
-//        return -1; //Pony one is smaller and should be sorted first
-//    } else {
-//        return 1; //Pony two is smaller (or equal) and should be sorted firs
-// } }
-// array.sort()
+function initCreationMode() {
+   //#10 swapping  right app-bar
+   $('#app-bar-messages').hide();
+   $('#app-bar-create').addClass('show');
 
-// t
-// function compareSize(ponyOne, ponyTwo) {
-//    return (ponyOne.size - ponyTwo.size);
-//  }
+   //#10 clearing messages in  container
+   $('#messages').empty();
+
+   //#10 swapping send and create button
+   $('#sendButton').hide();
+   $('#button-create').show();
+}
+
+
+// #10 function to end "create new channel"-mode
+
+function abortCreationMode() {
+   //#10 abort restores previously selected channel
+   $('#app-bar-messages').show();
+   $('#app-bar-create').removeClass('show');
+   $('#button-create').hide();
+   $('#sendButton').show();
+}
